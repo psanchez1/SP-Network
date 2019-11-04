@@ -1,19 +1,20 @@
 const box = require('./box');
 
-class p_box extends box{
-    constructor(){
-        super();
+class p_box extends box {
+    constructor(input) {
+        super(input);
+        this.type = 'p_box';
 
         //create transposition rules
         this.mappings = new Map();
         let indices = [];
-        for(let i = 0; i < 16; i++){
+        for (let i = 0; i < 16; i++) {
             indices[i] = i;
         }
 
         console.log("P Box:");
 
-        for(let i = 0; i < 16; i++){
+        for (let i = 0; i < 16; i++) {
             //console.log(indices);
             let rand_index = Math.floor(Math.random() * (indices.length));
             let rand_output = indices[rand_index];
@@ -26,19 +27,22 @@ class p_box extends box{
         this.c_outputs = [];
     }
 
-    encrypt(){
+    encrypt() {
         //get inputs from connected inputs
         let input = '';
-        for(let i = 0; i < this.c_inputs.length; i++){
-            input += this.toBinary(this.c_inputs[i].output, false);
+        for (let i = 0; i < this.c_inputs.length; i++) {
+            console.log(`p_box received ${this.c_inputs[i].output} as input`);
+            input += this.toBinary(this.c_inputs[i].output);
         }
+        console.log(`Input: ${input}`);
 
         //swap bits according to mappings
-        for(let i = 0; i < 16; i++){
+        for (let i = 0; i < 16; i++) {
             let dest = this.mappings.get(i);
-            swap(i, dest, input);
+            console.log(`Swapping indices: ${i} and ${dest}`);
+            input = this.swap(i, dest, input);
         }
-
+        input = this.arrayToString(input);
         this.outputs = [];
         let num1 = parseInt(input.substring(0, 4), 2);
         let num2 = parseInt(input.substring(4, 8), 2);
@@ -48,42 +52,52 @@ class p_box extends box{
         this.outputs.push(num2);
         this.outputs.push(num3);
         this.outputs.push(num4);
+        console.log(`Output: ${input}`);
     }
 
     //helper function for swapping indices of array
-    swap(x, y, arr){
-        if(x >= arr.length || y >= arr.length
-            || x < 0 || y < 0){
+    swap(x, y, arr) {
+        if (x >= arr.length || y >= arr.length
+            || x < 0 || y < 0) {
             throw new RangeError();
         }
+        let newArr = null;
+        if (typeof arr === "string")
+            newArr = [...arr];
+        else
+            newArr = arr;
+        let temp = newArr[y];
+        newArr[y] = newArr[x];
+        newArr[x] = temp;
+        return newArr;
+    }
 
-        let temp = arr[y];
-        arr[y] = arr[x];
-        arr[x] = temp;
+    arrayToString(arr) {
+        return arr.join('');
     }
 
     //p_box can connect to 4 s_boxes
 
-    connect_input(input){
-        if(this.c_inputs.length >= 4)
+    connect_input(input) {
+        if (this.c_inputs.length >= 4)
             return;
         this.c_inputs.push(input);
     }
 
-    connect_output(output){
-        if(this.c_outputs.length >= 4)
+    connect_output(output) {
+        if (this.c_outputs.length >= 4)
             return;
         this.c_outputs.push(output);
         output.connect_input(this);
     }
 
-    toBinary(decimal, padding=true){
+    toBinary(decimal, padding = true, binarySize = 4) {
         let binary = (decimal >>> 0).toString(2);
-        if(!padding)
+        if (!padding)
             return binary;
-        let paddingSize = 16 - binary.length;
+        let paddingSize = binarySize - binary.length;
         let paddingStr = '';
-        for(let i = 0; i < paddingSize; i++){
+        for (let i = 0; i < paddingSize; i++) {
             paddingStr = '0' + paddingStr;
         }
         return paddingStr + binary;
