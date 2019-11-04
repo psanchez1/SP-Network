@@ -1,5 +1,8 @@
 const box = require('./box');
+const {toBinary} = require('./functions');
 
+
+//class for 16 bit permutation box
 class p_box extends box {
     constructor(input) {
         super(input);
@@ -32,7 +35,7 @@ class p_box extends box {
         let input = '';
         for (let i = 0; i < this.c_inputs.length; i++) {
             console.log(`p_box received ${this.c_inputs[i].output} as input`);
-            input += this.toBinary(this.c_inputs[i].output);
+            input += toBinary(this.c_inputs[i].output);
         }
         console.log(`Input: ${input}`);
 
@@ -90,19 +93,6 @@ class p_box extends box {
         this.c_outputs.push(output);
         output.connect_input(this);
     }
-
-    toBinary(decimal, padding = true, binarySize = 4) {
-        let binary = (decimal >>> 0).toString(2);
-        if (!padding)
-            return binary;
-        let paddingSize = binarySize - binary.length;
-        let paddingStr = '';
-        for (let i = 0; i < paddingSize; i++) {
-            paddingStr = '0' + paddingStr;
-        }
-        return paddingStr + binary;
-    }
-
 }
 
 module.exports = p_box;
