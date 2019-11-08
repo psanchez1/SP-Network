@@ -3,16 +3,19 @@
 class box {
 
     constructor(input) {
-        this.input = input;
+        if(input)
+            this.input = input;
     }
 
     /* encrypt function must be defined in subclasses */
 
     //continues encryption in connected boxes
     continuous_encrypt(input) {
+        if(input)
+            this.input = input;
         this.encrypt(this.input);
         if (this.nextSibling) {
-            this.nextSibling.continuous_encrypt(); //change this to not depend on input?
+            this.nextSibling.continuous_encrypt();
         }
         else if (this.c_output) {
             this.c_output.continuous_encrypt(this.output);

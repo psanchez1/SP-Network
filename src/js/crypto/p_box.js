@@ -93,6 +93,13 @@ class p_box extends box {
         this.c_outputs.push(output);
         output.connect_input(this);
     }
+
+    reportMappings(){
+        console.log('P-Box Mappings:');
+        for(let k of this.mappings.keys()){
+            console.log(`${k} mapped to ${this.mappings.get(k)}`);
+        }
+    }
 }
 
 module.exports = p_box;

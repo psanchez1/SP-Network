@@ -12,10 +12,8 @@ class s_box extends box {
             let rand_num = Math.floor((Math.random() * 16));
             this.mappings.set(i, rand_num);
 
-            /*
-            let debug = `${i} mapped to ${rand_num}`;
-            console.log(debug);
-            */
+            //console.log(`${i} mapped to ${rand_num}`);
+            
         }
     };
 
@@ -23,8 +21,15 @@ class s_box extends box {
         if (input)
             this.input = input;
         this.output = this.mappings.get(this.input);
-        let debug = `${this.input} mapped to ${this.output}`;
+        let debug = `Encrypt results: ${this.input} mapped to ${this.output}`;
         console.log(debug);
+    }
+
+    reportMappings(){
+        console.log('S-Box Mappings: ');
+        for(let k of this.mappings.keys()){
+            console.log(`${k} mapped to ${this.mappings.get(k)}`);
+        }
     }
 
 

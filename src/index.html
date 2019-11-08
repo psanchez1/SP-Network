@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/animations.css">
+        <link rel="stylesheet" href="css/pop_up.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <title>SP-Network</title>
+</head>
+
+<body>
+        <div id="overlay">
+                <div class="toast">
+                        <h2 id="toastMessage">
+                                Toast
+                        </h2>
+                </div>
+        </div>
+
+        <div id="about" class="popUp">
+                <div class="textContainer">
+                        <h2>About</h2>
+                        <p>SP-Network by Pablo Sanchez</p>
+                        <input class="button" type="button" value="Close" onclick="toggleAbout()">
+                </div>
+        </div>
+
+        <div id="popUp01" class="popUp">
+                <div class="textContainer">
+                        <h2 id="popUpTitle">Name</h2>
+                        <p id="popUpText">Stats</p>
+                        <input class="button" type="button" value="Close" onclick="togglePopUp()">
+                </div>
+        </div>
+
+        <div id="main">
+                <div id="topBar">
+                        <input class="button" type="button" value="Home" onclick="start()">
+                        <input id="textBox1" type="text" size="35" name="url" placeholder="Plaintext" autofocus>
+                        <input class="button" type="button" value="Run" onclick="onButton()">
+                        <input class="button" type="button" value="Settings" onclick="toggleNav()">
+                        <br><br>
+                        <div id="buttons">
+
+
+                        </div>
+                </div>
+
+                <div id="content">
+                        <div class="row">
+                                <div class="container">
+                                        <h3>Input</h3>
+                                        <div class="box"></div>
+                                        <h3>Output</h3>
+                                </div>
+                                <div class="container">
+                                        <h3>Input</h3>
+                                        <div class="box"></div>
+                                        <h3>Output</h3>
+                                </div>
+                                <div class="container">
+                                        <h3>Input</h3>
+                                        <div class="box"></div>
+                                        <h3>Output</h3>
+                                </div>
+                                <div class="container">
+                                        <h3>Input</h3>
+                                        <div class="box"></div>
+                                        <h3>Output</h3>
+                                </div>
+                        </div>
+
+                </div>
+                <div id="mySidenav" class="sidenav">
+                        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                        <a href="#" onclick="toggleAbout()">About</a>
+                        <a href="#" onclick="showFiles()">Debugging</a>
+                </div>
+        </div>
+
+        <script src="js/script.js"></script>
+        <script src="js/navbar.js"></script>
+
+</body>
+
+</html>
