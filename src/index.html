@@ -36,9 +36,9 @@
 
         <div id="main">
                 <div id="topBar">
-                        <input class="button" type="button" value="Home" onclick="start()">
+                        <input class="button" type="button" value="Reset" onclick="reset()">
                         <input id="textBox1" type="text" size="35" name="url" placeholder="Plaintext" autofocus>
-                        <input class="button" type="button" value="Run" onclick="onButton()">
+                        <input class="button" type="button" value="Run" onclick="start()">
                         <input class="button" type="button" value="Settings" onclick="toggleNav()">
                         <br><br>
                         <div id="buttons">
@@ -48,28 +48,46 @@
                 </div>
 
                 <div id="content">
-                        <div class="row">
-                                <div class="container">
-                                        <h3>Input</h3>
-                                        <div class="box"></div>
-                                        <h3>Output</h3>
-                                </div>
-                                <div class="container">
-                                        <h3>Input</h3>
-                                        <div class="box"></div>
-                                        <h3>Output</h3>
-                                </div>
-                                <div class="container">
-                                        <h3>Input</h3>
-                                        <div class="box"></div>
-                                        <h3>Output</h3>
-                                </div>
-                                <div class="container">
-                                        <h3>Input</h3>
-                                        <div class="box"></div>
-                                        <h3>Output</h3>
+                        <!--
+<div class="row">
+                                <div class="w-container" id="k1" data-type="round_key">
+                                        <h3 class="input">Input</h3>
+                                        <div class="rectangle"></div>
+                                        <h3 class="output">Output</h3>
                                 </div>
                         </div>
+
+                        <div class="row">
+                                <div class="container" id="s1" data-type="s_box">
+                                        <h3 class="input">Input</h3>
+                                        <div class="box"></div>
+                                        <h3 class="output">Output</h3>
+                                </div>
+                                <div class="container" id="s2" data-type="s_box">
+                                        <h3 class="input">Input</h3>
+                                        <div class="box"></div>
+                                        <h3 class="output">Output</h3>
+                                </div>
+                                <div class="container" id="s3" data-type="s_box">
+                                        <h3 class="input">Input</h3>
+                                        <div class="box"></div>
+                                        <h3 class="output">Output</h3>
+                                </div>
+                                <div class="container" id="s4" data-type="s_box">
+                                        <h3 class="input">Input</h3>
+                                        <div class="box"></div>
+                                        <h3 class="output">Output</h3>
+                                </div>
+                        </div>
+                        <div class="row">
+                                <div class="w-container" id="p1" data-type="p_box">
+                                        <h3 class="input">Input</h3>
+                                        <div class="rectangle"></div>
+                                        <h3 class="output">Output</h3>
+                                </div>
+                        </div>
+                        -->
+                        
 
                 </div>
                 <div id="mySidenav" class="sidenav">
@@ -79,8 +97,11 @@
                 </div>
         </div>
 
+        <script src="js/DOM_Classes.js"></script>
         <script src="js/script.js"></script>
         <script src="js/navbar.js"></script>
+        <script src="js/contextMenu.js"></script>
+        <script src="js/pop_up.js"></script>
 
 </body>
 

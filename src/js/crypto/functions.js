@@ -11,4 +11,14 @@ function toBinary(decimal, padding = true, binarySize = 4) {
     return paddingStr + binary;
 }
 
-module.exports = {toBinary};
+//convert binary string to decimal number
+function toDecimal(str){
+    return parseInt(str, 2);
+}
+
+//convert array of characters to string
+function arrayToString(arr) {
+    return arr.join('');
+}
+
+module.exports = { toBinary, arrayToString, toDecimal };

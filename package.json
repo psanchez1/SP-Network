@@ -11,5 +11,8 @@
   "license": "ISC",
   "devDependencies": {
     "electron": "^6.0.11"
+  },
+  "dependencies": {
+    "mini-signals": "^1.2.0"
   }
 }

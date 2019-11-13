@@ -5,6 +5,7 @@ class s_box extends box {
     constructor(input) {
         super(input);
         this.type = 's_box';
+        this.size = 4;
 
         //create substitution rules for 0 to 15
         this.mappings = new Map();
@@ -23,6 +24,7 @@ class s_box extends box {
         this.output = this.mappings.get(this.input);
         let debug = `Encrypt results: ${this.input} mapped to ${this.output}`;
         console.log(debug);
+        this.updated.dispatch();
     }
 
     reportMappings(){

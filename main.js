@@ -48,15 +48,18 @@ app.on('ready', function(){
     const toggleDevTools = new MenuItem({
         role: "toggleDevtools"
     });
+
+    const getInfo = new MenuItem({
+        label: "Get Info",
+        click: (e) =>{
+            mainWindow.webContents.send('getInfo');
+        }
+    });
     
     ctxMenu.append(toggleDevTools);
+    ctxMenu.append(getInfo);
 
     mainWindow.webContents.on('context-menu', function(e, params){
-        selectedUrl = params.srcURL.substr(8);
-        selectedUrl = selectedUrl.replace("//", "/");
-        selectedUrl = decodeURI(selectedUrl);
-        
-        console.log(selectedUrl);
         //ctxMenu.popup(mainWindow, params.x, params.y);
     });
 });

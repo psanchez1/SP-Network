@@ -1,3 +1,4 @@
+const Signal = require('mini-signals');
 
 //generic box class
 class box {
@@ -5,6 +6,12 @@ class box {
     constructor(input) {
         if(input)
             this.input = input;
+        this.updated = new Signal(); //raised when important values of class are changed
+    }
+
+    setInput(input){
+        this.input = input;
+        this.updated.dispatch();
     }
 
     /* encrypt function must be defined in subclasses */
@@ -20,6 +27,8 @@ class box {
         else if (this.c_output) {
             this.c_output.continuous_encrypt(this.output);
         }
+        else if(this.c_outputs.length === 1)
+            this.c_outputs[0].continuous_encrypt(this.output);
     }
 
     connect_input(c_input) {

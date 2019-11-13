@@ -1,21 +1,31 @@
 const { toBinary } = require('./functions');
+const Signal = require('mini-signals');
 
 //class for 16 bit round key
 class round_key {
     constructor(key) {
         this.key = key;
         this.type = 'round_key';
+        this.size = 16;
         this.c_inputs = [];
         this.c_outputs = [];
+        this.updated = new Signal();
     }
 
     //TODO: validate input, must be number
     setInput(input) {
         this.input = input;
+        this.updated.dispatch();
     }
 
-    continuous_encrypt(input) {
-        this.encrypt(this.input);
+    connect_input(c_input) {
+        this.c_input = c_input;
+    }
+
+    continuous_encrypt() {
+        console.log('key continuous encrypt called');
+        this.encrypt();
+        this.updated.dispatch();
         for(let i = 0; i < 3; i++){
             this.c_outputs[i].nextSibling = this.c_outputs[i+1];
         }
