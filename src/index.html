@@ -36,14 +36,19 @@
 
         <div id="main">
                 <div id="topBar">
-                        <input class="button" type="button" value="Reset" onclick="reset()">
-                        <input id="textBox1" type="text" size="35" name="url" placeholder="Plaintext" autofocus>
-                        <input class="button" type="button" value="Run" onclick="start()">
-                        <input class="button" type="button" value="Settings" onclick="toggleNav()">
-                        <br><br>
-                        <div id="buttons">
+                        <div class="row">
+                                <input class="button" type="button" value="Reset" onclick="reset()">
+                                <input id="textBox1" class="textBox" type="text" size="35" placeholder="Plaintext" autofocus>
+                                <input type="checkbox" id="BinaryCheck">
+                                <span>Binary</span>
+                                <input type="checkbox" checked="true" id="DecimalCheck">
+                                <span>Decimal</span>
+                        </div>
 
-
+                        <div class="row">
+                                <input id="keyText" class="textBox" type="text" size="35" placeholder="Key">
+                                <input class="button" type="button" value="Run" onclick="start()">
+                                <input class="button" type="button" value="Settings" onclick="toggleNav()">
                         </div>
                 </div>
 
@@ -87,7 +92,7 @@
                                 </div>
                         </div>
                         -->
-                        
+
 
                 </div>
                 <div id="mySidenav" class="sidenav">

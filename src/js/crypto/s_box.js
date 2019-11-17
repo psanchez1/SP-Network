@@ -7,10 +7,17 @@ class s_box extends box {
         this.type = 's_box';
         this.size = 4;
 
+        let numbers = [];
+        for(let i = 0; i < 16; i++){
+            numbers.push(i);
+        }
+
         //create substitution rules for 0 to 15
         this.mappings = new Map();
         for (let i = 0; i < 16; i++) {
-            let rand_num = Math.floor((Math.random() * 16));
+            let rand_index = Math.floor((Math.random() * numbers.length));
+            let rand_num = numbers[rand_index];
+            numbers.splice(rand_index, 1);
             this.mappings.set(i, rand_num);
 
             //console.log(`${i} mapped to ${rand_num}`);

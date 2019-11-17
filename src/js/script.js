@@ -4,6 +4,7 @@ const round_key = require('./js/crypto/round_key.js');
 const { toBinary } = require('./js/crypto/functions.js');
 
 const content = document.getElementById('content');
+const colorScheme = ['green', 'yellow', 'red', 'cyan'];
 let boxes = new Map();
 
 //create crypto objects
@@ -40,13 +41,13 @@ row1.appendChild(DOM_key1.element);
 
 //create DOM objects for row 2
 let row2 = createRow();
-let DOM_s1 = new DOM_s_box(box1, 's1');
+let DOM_s1 = new DOM_s_box(box1, 's1', colorScheme[0]);
 row2.appendChild(DOM_s1.element);
-let DOM_s2 = new DOM_s_box(box2, 's2');
+let DOM_s2 = new DOM_s_box(box2, 's2', colorScheme[1]);
 row2.appendChild(DOM_s2.element);
-let DOM_s3 = new DOM_s_box(box3, 's3');
+let DOM_s3 = new DOM_s_box(box3, 's3', colorScheme[2]);
 row2.appendChild(DOM_s3.element);
-let DOM_s4 = new DOM_s_box(box4, 's4');
+let DOM_s4 = new DOM_s_box(box4, 's4', colorScheme[3]);
 row2.appendChild(DOM_s4.element);
 
 //create DOM objects for row 3

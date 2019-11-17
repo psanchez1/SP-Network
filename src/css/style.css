@@ -1,13 +1,13 @@
 /* Colors: #2F4F4F #80FFFF #66FFFF #B35824 #FF9F66 */
 :root{
-  --tools-size: 100px;
+  --tools-size: 150px;
 }
 
 body, html {
     text-align: center;
 }
 
-h1, h2, h3, h4, p{
+h1, h2, h3, h4, p, span{
   color: white;
 }
 
@@ -19,7 +19,7 @@ h1, h2, h3, h4, p{
   border-bottom: solid 2px rgb(39, 39, 39);
 }
 
-#textBox1 {
+.textBox{
   width: 50%;
   height: 35px;
   margin-top: 35px;
@@ -162,8 +162,4 @@ h1, h2, h3, h4, p{
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
   background-color: #4CAF50; /* Green */
   color: white;
-}
-
-#buttons{
-    padding-bottom: 0;
 }
