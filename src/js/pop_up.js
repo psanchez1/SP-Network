@@ -39,7 +39,7 @@ function displayBoxInfo(box){
         }
     }
     if(box.type === 'round_key'){
-        text += `\nKey: ${box.key}\n`;
+        text += `\nKey: ${box.key} or ${toBinary(box.key, true, box.size)}\n`;
     }
     document.getElementById('popUpText').innerText = text;
     popUp.style.display = "block";

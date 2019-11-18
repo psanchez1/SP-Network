@@ -7,6 +7,24 @@ const content = document.getElementById('content');
 const colorScheme = ['green', 'yellow', 'red', 'cyan'];
 let boxes = new Map();
 
+//checkboxes
+let globalBinary = false;
+let globalDecimal = true;
+const decimalCheck = document.getElementById('DecimalCheck');
+const binaryCheck = document.getElementById('BinaryCheck');
+
+function toggleBinary(){
+    globalDecimal = globalBinary;
+    globalBinary = !globalBinary;
+    decimalCheck.checked = globalDecimal;
+}
+
+function toggleDecimal(){
+    globalBinary = globalDecimal;
+    globalDecimal = !globalDecimal;
+    binaryCheck.checked = globalBinary;
+}
+
 //create crypto objects
 let key1 = new round_key(1560);
 boxes.set('k1', key1);
@@ -75,11 +93,20 @@ function reset() {
 
 function start() {
     let textbox = document.getElementById('textBox1');
+    let keyText = document.getElementById('keyText');
+
+    //default values
+    let value = 22;
+    let key_value = 1560;
+
+    if(textbox.value)
+        value = globalBinary ? parseInt(textbox.value, 2) : parseInt(textbox.value);
+    if(keyText.value)
+        key_value = globalBinary ? parseInt(keyText.value, 2) : parseInt(keyText.value);
+
     if (textbox.value) {
-        console.log(`TextBox value: ${textbox.value}`);
-        let key = parseInt(textbox.value);
-        key1 = new round_key(1560);
-        key1.setInput(key);
+        key1 = new round_key(key_value);
+        key1.setInput(value);
         resetBindings();
     }
 

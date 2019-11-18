@@ -21,7 +21,6 @@ class s_box extends box {
             this.mappings.set(i, rand_num);
 
             //console.log(`${i} mapped to ${rand_num}`);
-            
         }
     };
 
@@ -29,8 +28,7 @@ class s_box extends box {
         if (input)
             this.input = input;
         this.output = this.mappings.get(this.input);
-        let debug = `Encrypt results: ${this.input} mapped to ${this.output}`;
-        console.log(debug);
+        console.log(`Encrypt results: ${this.input} mapped to ${this.output}`);
         this.updated.dispatch();
     }
 
@@ -40,8 +38,6 @@ class s_box extends box {
             console.log(`${k} mapped to ${this.mappings.get(k)}`);
         }
     }
-
-
 };
 
 module.exports = s_box;

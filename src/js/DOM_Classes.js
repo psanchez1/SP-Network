@@ -7,6 +7,23 @@ function colorSpan(color, text) {
     return span;
 }
 
+//color a 16-bit binary number in 4-bit groups
+function colorBinary(binary) {
+
+}
+
+String.prototype.splice = (start, newSubStr) => {
+    return this.slice(0, start) + newSubStr + this.slice(start);
+}
+
+//returns binary string seperated in 4-bit groups
+function splitBinary(binary) {
+    let r_value = binary.splice(4, ' ');
+    r_value = r_value.splice(9, ' ');
+    r_value = r_value.splice(14, ' ');
+    return r_value;
+}
+
 class DOMBox {
     constructor(box, id) {
         this.box = box;
@@ -80,7 +97,8 @@ class DOM_round_key extends DOMBox {
         this.element.lastElementChild.appendChild(colorSpan(colorScheme[1], second + ' '));
         this.element.lastElementChild.appendChild(colorSpan(colorScheme[2], third + ' '));
         this.element.lastElementChild.appendChild(colorSpan(colorScheme[3], fourth + ' '));
-
+        let rectangle = document.querySelector(`#${this.id} .rectangle`);
+        rectangle.innerHTML = `<h3>XOR with Key: ${toBinary(this.box.key, true, this.box.size)}</h3>`;
     }
 }
 
@@ -122,7 +140,7 @@ class DOM_s_box extends DOMBox {
             this.element.lastElementChild.innerText = output + '\n';
             this.element.lastElementChild.appendChild(colorSpan(this.color, toBinary(output, true, this.box.size)));
         }
-        else{
+        else {
             super.updateValues();
         }
     }

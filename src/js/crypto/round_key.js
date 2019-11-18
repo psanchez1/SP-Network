@@ -26,10 +26,14 @@ class round_key {
         console.log('key continuous encrypt called');
         this.encrypt();
         this.updated.dispatch();
-        for(let i = 0; i < 3; i++){
-            this.c_outputs[i].nextSibling = this.c_outputs[i+1];
+        if(this.c_outputs.length >= 4){
+            for(let i = 0; i < 3; i++){
+                this.c_outputs[i].nextSibling = this.c_outputs[i+1];
+            }
+            this.c_outputs[0].continuous_encrypt();
         }
-        this.c_outputs[0].continuous_encrypt();
+        
+        
         /*
         for(let output of this.c_outputs){
             output.continuous_encrypt();
