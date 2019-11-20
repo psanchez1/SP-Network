@@ -1,29 +1,4 @@
 
-//helper function returns span element with specified colored text
-function colorSpan(color, text) {
-    let span = document.createElement('SPAN');
-    span.style.color = color;
-    span.innerText = text;
-    return span;
-}
-
-//color a 16-bit binary number in 4-bit groups
-function colorBinary(binary) {
-
-}
-
-String.prototype.splice = (start, newSubStr) => {
-    return this.slice(0, start) + newSubStr + this.slice(start);
-}
-
-//returns binary string seperated in 4-bit groups
-function splitBinary(binary) {
-    let r_value = binary.splice(4, ' ');
-    r_value = r_value.splice(9, ' ');
-    r_value = r_value.splice(14, ' ');
-    return r_value;
-}
-
 class DOMBox {
     constructor(box, id) {
         this.box = box;
@@ -44,6 +19,20 @@ class DOMBox {
     changeBox(newBox) {
         this.box = newBox;
         this.box.updated.add(this.updateValues, this);
+    }
+
+    //add rows within container, used to create bit containers
+    addContainerRow(container, idPrefix){
+        let row = document.createElement('div');
+        row.classList.add('row');
+        container.appendChild(row);
+        for(let i = 0; i < 16; i++){
+            let bitContainer = document.createElement('div');
+            bitContainer.classList.add('bitContainer');
+            bitContainer.id = `${idPrefix}${i}`;
+            bitContainer.classList.add(`${idPrefix}${i}`);
+            row.appendChild(bitContainer);
+        }
     }
 };
 
@@ -161,6 +150,10 @@ class DOM_p_box extends DOMBox {
         let rectangle = document.createElement('DIV');
         rectangle.setAttribute('data-type', 'p_box');
         rectangle.classList.add('rectangle');
+
+        this.addContainerRow(rectangle, 'i'); //add row for input bits
+        this.addContainerRow(rectangle, 'o'); //add row for output bits
+
         element.appendChild(rectangle);
         let output_label = document.createElement('H3');
         output_label.setAttribute('data-type', 'p_box');
@@ -168,5 +161,19 @@ class DOM_p_box extends DOMBox {
         output_label.innerText = 'Output';
         element.appendChild(output_label);
         //this.box.updated.add(this.updateValues, this);
+    }
+
+    updateValues(){
+        super.updateValues();
+        let b_input = toBinary(this.box.input, true, this.box.size);
+        for(let i = 0; i < 16; i++){
+            //document.getElementById(`i${i}`).innerText = b_input[i];
+            document.querySelector(`#${this.element.id} .i${i}`).innerText = b_input[i];
+        }
+        let o_output = toBinary(this.box.output, true, this.box.size);
+        for(let i = 0; i < 16; i++){
+            //document.getElementById(`o${i}`).innerText = o_output[i];
+            document.querySelector(`#${this.element.id} .o${i}`).innerText = o_output[i];
+        }
     }
 }
