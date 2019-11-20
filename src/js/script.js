@@ -104,7 +104,7 @@ function start() {
     if(keyText.value)
         key_value = globalBinary ? parseInt(keyText.value, 2) : parseInt(keyText.value);
 
-    if (textbox.value) {
+    if (textbox.value || keyText.value) {
         key1 = new round_key(key_value);
         key1.setInput(value);
         resetBindings();
@@ -145,3 +145,13 @@ function createRow() {
     content.appendChild(row);
     return row;
 }
+
+
+//testing lines
+let svg = content.appendChild(document.createElement('SVG'));
+let line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+line.setAttribute('x1', 0);
+line.setAttribute('y1', 0);
+line.setAttribute('x2', 340);
+line.setAttribute('y2', 440);
+svg.appendChild(line);
