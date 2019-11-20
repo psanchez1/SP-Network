@@ -51,7 +51,11 @@ class DOM_round_key extends DOMBox {
         let rectangle = document.createElement('DIV');
         rectangle.setAttribute('data-type', 'round_key');
         rectangle.classList.add('rectangle');
-        rectangle.innerHTML = `<h3>XOR with Key: ${toBinary(this.box.key, true, this.box.size)}</h3>`;
+        //rectangle.innerHTML = `<h3>XOR with Key: ${toBinary(this.box.key, true, this.box.size)}</h3>`;
+
+        this.addContainerRow(rectangle, 'i');
+        this.addContainerRow(rectangle, 'k');
+
         element.appendChild(rectangle);
         let output_label = document.createElement('H3');
         output_label.setAttribute('data-type', 'round_key');
@@ -87,7 +91,12 @@ class DOM_round_key extends DOMBox {
         this.element.lastElementChild.appendChild(colorSpan(colorScheme[2], third + ' '));
         this.element.lastElementChild.appendChild(colorSpan(colorScheme[3], fourth + ' '));
         let rectangle = document.querySelector(`#${this.id} .rectangle`);
-        rectangle.innerHTML = `<h3>XOR with Key: ${toBinary(this.box.key, true, this.box.size)}</h3>`;
+        //rectangle.innerHTML = `<h3>XOR with Key: ${toBinary(this.box.key, true, this.box.size)}</h3>`;
+        let b_key = toBinary(this.box.key, true, this.box.size);
+        for(let i = 0; i < 16; i++){
+            document.querySelector(`#${this.element.id} .i${i}`).innerText = b_input[i];
+            document.querySelector(`#${this.element.id} .k${i}`).innerText = b_key[i];
+        }
     }
 }
 
