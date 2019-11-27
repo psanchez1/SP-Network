@@ -25,24 +25,17 @@ class round_key {
     continuous_encrypt() {
         console.log('key continuous encrypt called');
         this.encrypt();
-        this.updated.dispatch();
         if(this.c_outputs.length >= 4){
             for(let i = 0; i < 3; i++){
                 this.c_outputs[i].nextSibling = this.c_outputs[i+1];
             }
             this.c_outputs[0].continuous_encrypt();
         }
-        
-        
-        /*
-        for(let output of this.c_outputs){
-            output.continuous_encrypt();
-        }
-        */
     }
 
     encrypt() {
         //xor input with key
+        console.log(`${this.type} encrypting`);
         this.output = this.input ^ this.key;
         let xored = toBinary(this.input ^ this.key, true, 16);
         this.outputs = [];
@@ -66,6 +59,7 @@ class round_key {
         for (let number of this.outputs) {
             console.log(`Output: ${number}`);
         }
+        this.updated.dispatch();
     }
 
     //TODO: set up outbound connections to s_boxes

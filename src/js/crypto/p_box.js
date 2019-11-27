@@ -41,13 +41,17 @@ class p_box extends box {
         //console.log(`Input: ${input}`);
         this.input = toDecimal(input);
 
+        let output = [];
+
         //swap bits according to mappings
         for (let i = 0; i < 16; i++) {
             let dest = this.mappings.get(i);
-            //console.log(`Swapping indices: ${i} and ${dest}`);
-            input = this.swap(i, dest, input);
+            
+            //input = this.swap(i, dest, input); //error here? don't swap, just set
+            output[dest] = input[i]; 
         }
-        input = arrayToString(input);
+        //input = arrayToString(input);
+        input = arrayToString(output);
         this.outputs = [];
         let num1 = parseInt(input.substring(0, 4), 2);
         let num2 = parseInt(input.substring(4, 8), 2);
@@ -65,7 +69,7 @@ class p_box extends box {
             this.c_outputs[0].setInput(this.output);
     }
 
-    //helper function for swapping indices of array
+    //may delete this
     swap(x, y, arr) {
         if (x >= arr.length || y >= arr.length
             || x < 0 || y < 0) {

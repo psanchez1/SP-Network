@@ -3,7 +3,7 @@ class DOMBox {
     constructor(box, id) {
         this.box = box;
         this.id = id;
-        this.box.updated.add(this.updateValues, this);
+        this.handler = this.box.updated.add(this.updateValues, this);
         this.element = document.createElement('DIV');
         this.element.setAttribute('data-id', this.id); //maybe remove, unnecessary
     }
@@ -17,8 +17,9 @@ class DOMBox {
     }
 
     changeBox(newBox) {
+        this.handler.detach();
         this.box = newBox;
-        this.box.updated.add(this.updateValues, this);
+        this.handler = this.box.updated.add(this.updateValues, this);
     }
 
     //add rows within container, used to create bit containers
@@ -40,6 +41,7 @@ class DOM_round_key extends DOMBox {
     constructor(round_key, id) {
         super(round_key, id);
         let element = this.element;
+        //keyText.value = this.box.key;
         element.classList.add('w-container');
         element.id = id;
         element.setAttribute('data-type', 'round_key');
@@ -183,6 +185,14 @@ class DOM_p_box extends DOMBox {
         for(let i = 0; i < 16; i++){
             //document.getElementById(`o${i}`).innerText = o_output[i];
             document.querySelector(`#${this.element.id} .o${i}`).innerText = o_output[i];
+        }
+
+        //draw lines
+        for (let i = 0; i < 16; i++){
+            let input = document.querySelector(`#${this.element.id} .i${i}`);
+            let oNum = this.box.mappings.get(i);
+            let output = document.querySelector(`#${this.element.id} .o${oNum}`);
+            createLine(input, output);
         }
     }
 }
