@@ -62,7 +62,6 @@ class round_key {
         this.updated.dispatch();
     }
 
-    //TODO: set up outbound connections to s_boxes
     connect_output(output) {
         if (this.c_outputs.length >= 4)
             return;
