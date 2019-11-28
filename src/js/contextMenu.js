@@ -19,5 +19,5 @@ ipcRenderer.on('getInfo', e => {
 });
 
 ipcRenderer.on('closerLook', e =>{
-    
+    displayPBox(boxes.get(rightClickedElement.id));
 });
