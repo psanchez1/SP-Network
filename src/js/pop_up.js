@@ -66,17 +66,20 @@ function displayPBox(box) {
     let rectangle = row.appendChild(document.createElement('DIV'));
     rectangle.classList.add('rectangle');
     addContainerRow(rectangle, 'i');
-    addContainerRow(rectangle, 'o');
+    let outRow = addContainerRow(rectangle, 'o');
     let b_input = toBinary(box.input, true, box.size);
     let b_output = toBinary(box.output, true, box.size);
     for (let i = 0; i < 16; i++) {
         rectangle.querySelector(`.i${i}`).innerText = b_input[i];
         rectangle.querySelector(`.o${i}`).innerText = b_output[i];
     }
-
+    outRow.style.visibility = 'hidden';
     document.getElementById('popUpText').innerText = '';
     popUp.style.display = "block";
     setTimeout(drawLines, 1000, box, rectangle);
+    setTimeout(function(){
+        outRow.style.visibility = 'visible';
+    }, 1500);
 }
 
 //add rows within container, used to create bit containers
@@ -86,11 +89,12 @@ function addContainerRow(container, idPrefix) {
     container.appendChild(row);
     for (let i = 0; i < 16; i++) {
         let bitContainer = document.createElement('div');
-        bitContainer.classList.add('bitContainer');
+        bitContainer.classList.add('bigBitContainer');
         bitContainer.id = `${idPrefix}${i}`;
         bitContainer.classList.add(`${idPrefix}${i}`);
         row.appendChild(bitContainer);
     }
+    return row;
 }
 
 function drawLines(box, rectangle) {

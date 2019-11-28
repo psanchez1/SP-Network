@@ -38,9 +38,9 @@ function createRow() {
 function createLine(element1, element2) {
     let line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
     let x1 = getOffset(element1).left + (getWidth(element1) / 2);
-    let y1 = getOffset(element1).top + (getHeight(element1) / 2);
+    let y1 = getOffset(element1).top + (getHeight(element1));
     let x2 = getOffset(element2).left + (getWidth(element2) / 2);
-    let y2 = getOffset(element2).top + (getHeight(element2) / 2);
+    let y2 = getOffset(element2).top + (getHeight(element2) / 4);
     line.setAttributeNS(null, 'x1', x1);
     line.setAttributeNS(null, 'y1', y1);
     line.setAttributeNS(null, 'x2', x2);

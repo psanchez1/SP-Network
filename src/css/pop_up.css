@@ -20,9 +20,7 @@
     border-radius: 25px;
     margin: auto;
     padding: 20px;
-    position: absolute;
-    top: 10%;
-    left: 15%;
+    position: relative;
     display: block;
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
   }
@@ -56,4 +54,18 @@
     animation-name: fade;
     animation-duration: 4s;
     pointer-events: none;
+  }
+
+  .bigBitContainer {
+    border: 1px solid white;
+    height: 35px;
+    width: 30px;
+    display: inline-block;
+    margin-top: 15px;
+    margin-right: 14px;
+    margin-left: 14px;
+    margin-bottom: 15px;
+    color: white;
+    animation-name: fadeIn;
+    animation-duration: 1s;
   }
