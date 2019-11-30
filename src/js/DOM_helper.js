@@ -9,11 +9,6 @@ function colorSpan(color, text) {
     return span;
 }
 
-//color a 16-bit binary number in 4-bit groups
-function colorBinary(binary) {
-
-}
-
 String.prototype.splice = (start, newSubStr) => {
     return this.slice(0, start) + newSubStr + this.slice(start);
 }
