@@ -216,3 +216,10 @@ line:hover{
   stroke: green;
   z-index: 16;
 }
+
+.label-container{
+  height: 100%;
+  width: auto;
+  float: left;
+  color: white;
+}

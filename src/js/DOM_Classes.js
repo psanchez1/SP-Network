@@ -1,15 +1,18 @@
 
+let box_types = new Map();
+box_types.set('round_key', 'Round Key');
+box_types.set('p_box', 'P-Box');
+box_types.set('s_box', 'S-Box');
+
 class DOMBox {
     constructor(box, id) {
         this.box = box;
         this.id = id;
         this.handler = this.box.updated.add(this.updateValues, this);
         this.element = document.createElement('DIV');
-        this.element.setAttribute('data-id', this.id); //maybe remove, unnecessary
     }
 
     updateValues() {
-        console.log(this.element);
         let input = this.box.input;
         let output = this.box.output;
         this.element.firstElementChild.innerText = input + '\n' + toBinary(input, true, this.box.size);
@@ -35,6 +38,12 @@ class DOMBox {
             row.appendChild(bitContainer);
         }
     }
+
+    setupLabel(rectangle){
+        let label = rectangle.appendChild(document.createElement('DIV'));
+        label.classList.add('label-container');
+        label.innerText = box_types.get(this.box.type);
+    }
 };
 
 class DOM_round_key extends DOMBox {
@@ -51,10 +60,11 @@ class DOM_round_key extends DOMBox {
         input_label.innerText = 'Input';
         element.appendChild(input_label);
         let rectangle = document.createElement('DIV');
+        
         rectangle.setAttribute('data-type', 'round_key');
         rectangle.classList.add('rectangle');
         //rectangle.innerHTML = `<h3>XOR with Key: ${toBinary(this.box.key, true, this.box.size)}</h3>`;
-
+        this.setupLabel(rectangle);
         this.addContainerRow(rectangle, 'i');
         this.addContainerRow(rectangle, 'k');
 
@@ -161,7 +171,7 @@ class DOM_p_box extends DOMBox {
         let rectangle = document.createElement('DIV');
         rectangle.setAttribute('data-type', 'p_box');
         rectangle.classList.add('rectangle');
-
+        this.setupLabel(rectangle);
         this.addContainerRow(rectangle, 'i'); //add row for input bits
         this.addContainerRow(rectangle, 'o'); //add row for output bits
 

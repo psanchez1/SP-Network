@@ -1,4 +1,4 @@
-//const svg = content.appendChild(document.createElement('SVG'));
+
 const svg = document.querySelector('svg');
 
 //helper function returns span element with specified colored text

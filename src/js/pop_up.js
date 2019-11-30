@@ -20,7 +20,7 @@ function closeNav() {
 
 
 function togglePopUp() {
-    var popUp = document.getElementById("popUp01");
+    let popUp = document.getElementById("popUp01");
     if (popUp.style.display != "block")
         popUp.style.display = "block";
     else {
@@ -52,6 +52,8 @@ function displayBoxInfo(box) {
     popUp.style.display = "block";
 }
 
+let boundDrawLines = null;
+
 function displayPBox(box) {
     let popUp = document.getElementById('popUp01');
     document.getElementById('popUpTitle').innerText = box.type;
@@ -76,7 +78,8 @@ function displayPBox(box) {
     outRow.style.visibility = 'hidden';
     document.getElementById('popUpText').innerText = '';
     popUp.style.display = "block";
-    setTimeout(drawLines, 1000, box, rectangle);
+    boundDrawLines = drawLines.bind(this, box, rectangle);
+    setTimeout(boundDrawLines, 1000);
     setTimeout(function(){
         outRow.style.visibility = 'visible';
     }, 1500);
@@ -104,7 +107,16 @@ function drawLines(box, rectangle) {
         let output = rectangle.querySelector(`.o${oNum}`);
         createLine(input, output);
     }
+    console.log('Drew lines');
 }
+
+window.onresize = e =>{
+    let popUp = document.getElementById("popUp01");
+    if(popUp.style.display === 'block'){
+        clearLines();
+        boundDrawLines();
+    }
+};
 
 function customAlert(alert) {
     document.getElementById('modName').innerText = alert;
