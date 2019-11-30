@@ -13,13 +13,17 @@ let globalDecimal = true;
 const decimalCheck = document.getElementById('DecimalCheck');
 const binaryCheck = document.getElementById('BinaryCheck');
 
-function toggleBinary(){
+//textboxes
+let textbox = document.getElementById('textBox1');
+let keyText = document.getElementById('keyText');
+
+function toggleBinary() {
     globalDecimal = globalBinary;
     globalBinary = !globalBinary;
     decimalCheck.checked = globalDecimal;
 }
 
-function toggleDecimal(){
+function toggleDecimal() {
     globalBinary = globalDecimal;
     globalDecimal = !globalDecimal;
     binaryCheck.checked = globalBinary;
@@ -49,7 +53,6 @@ box3.connect_output(p1);
 box4.connect_output(p1);
 let key2 = new round_key(1560);
 boxes.set('k2', key2);
-key2.setInput(22);
 p1.connect_output(key2);
 
 //create DOM objects for row 1
@@ -78,6 +81,9 @@ let row4 = createRow();
 let DOM_key2 = new DOM_round_key(key2, 'k2');
 row4.appendChild(DOM_key2.element);
 
+console.log('DOM Key2:');
+console.log(DOM_key2);
+
 function reset() {
     key1 = new round_key(1560);
     key1.setInput(22);
@@ -92,29 +98,30 @@ function reset() {
 }
 
 function start() {
-    let textbox = document.getElementById('textBox1');
-    let keyText = document.getElementById('keyText');
-
     //default values
     let value = 22;
     let key_value = 1560;
 
-    if(textbox.value)
+    if (textbox.value)
         value = globalBinary ? parseInt(textbox.value, 2) : parseInt(textbox.value);
-    if(keyText.value)
+    if (keyText.value)
         key_value = globalBinary ? parseInt(keyText.value, 2) : parseInt(keyText.value);
 
-    if (textbox.value) {
+    if (textbox.value || keyText.value) {
         key1 = new round_key(key_value);
         key1.setInput(value);
+        key2 = new round_key(key_value);
         resetBindings();
     }
 
     key1.continuous_encrypt();
+    
 }
 
+//TODO: fix here, key2 DOM is not updating correctly
 function resetBindings() {
     boxes.set('k1', key1);
+    boxes.set('k2', key2);
     boxes.set('s1', box1);
     boxes.set('s2', box2);
     boxes.set('s3', box3);
@@ -138,10 +145,3 @@ function resetBindings() {
     p1.connect_output(key2);
 }
 
-//return new DOM row div element
-function createRow() {
-    let row = document.createElement('DIV');
-    row.classList.add('row');
-    content.appendChild(row);
-    return row;
-}

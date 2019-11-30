@@ -41,13 +41,14 @@ class p_box extends box {
         //console.log(`Input: ${input}`);
         this.input = toDecimal(input);
 
+        let output = [];
+
         //swap bits according to mappings
         for (let i = 0; i < 16; i++) {
             let dest = this.mappings.get(i);
-            //console.log(`Swapping indices: ${i} and ${dest}`);
-            input = this.swap(i, dest, input);
+            output[dest] = input[i];  //TODO: make changes to variable names to clear confusion
         }
-        input = arrayToString(input);
+        input = arrayToString(output);
         this.outputs = [];
         let num1 = parseInt(input.substring(0, 4), 2);
         let num2 = parseInt(input.substring(4, 8), 2);
@@ -63,23 +64,6 @@ class p_box extends box {
 
         if(this.c_outputs.length === 1)
             this.c_outputs[0].setInput(this.output);
-    }
-
-    //helper function for swapping indices of array
-    swap(x, y, arr) {
-        if (x >= arr.length || y >= arr.length
-            || x < 0 || y < 0) {
-            throw new RangeError();
-        }
-        let newArr = null;
-        if (typeof arr === "string")
-            newArr = [...arr];
-        else
-            newArr = arr;
-        let temp = newArr[y];
-        newArr[y] = newArr[x];
-        newArr[x] = temp;
-        return newArr;
     }
 
     //p_box can connect to 4 s_boxes

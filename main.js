@@ -16,7 +16,9 @@ const {app, BrowserWindow, Menu, ipcMain, shell, globalShortcut} = electron;
 let mainWindow;
 
 const ctxMenu = new Menu();
+const pBoxMenu = new Menu();
 global.ctxMenu = ctxMenu;
+global.pBoxMenu = pBoxMenu;
 
 app.on('ready', function(){
 
@@ -51,13 +53,23 @@ app.on('ready', function(){
 
     const getInfo = new MenuItem({
         label: "Get Info",
-        click: (e) =>{
+        click: e =>{
             mainWindow.webContents.send('getInfo');
+        }
+    });
+
+    const closerLook = new MenuItem({
+        label: "Closer Look",
+        click: e =>{
+            mainWindow.webContents.send('closerLook');
         }
     });
     
     ctxMenu.append(toggleDevTools);
     ctxMenu.append(getInfo);
+    pBoxMenu.append(toggleDevTools);
+    pBoxMenu.append(getInfo);
+    pBoxMenu.append(closerLook);
 
     mainWindow.webContents.on('context-menu', function(e, params){
         //ctxMenu.popup(mainWindow, params.x, params.y);

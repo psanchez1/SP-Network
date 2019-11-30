@@ -45,6 +45,14 @@ class box {
     connect_sibling(sibling) {
         this.nextSibling = sibling;
     }
+
+    clear(){
+        this.c_input = null;
+        this.c_inputs = [];
+        this.c_output = null;
+        this.c_outputs = [];
+        this.nextSibling = null;
+    }
 }
 
 module.exports = box;

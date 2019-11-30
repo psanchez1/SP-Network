@@ -101,6 +101,15 @@ h1, h2, h3, h4, p, span{
   height: auto;
 }
 
+.pad-row{
+  display: block;
+  position: relative;
+  width: 100%;
+  height: auto;
+  box-sizing: border-box;
+  padding-bottom: 20px;
+}
+
 .container {
   display: inline-block;
   position: relative;
@@ -109,7 +118,6 @@ h1, h2, h3, h4, p, span{
 }
 
 .container:hover{
-  transform: scale(1.01);
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
@@ -122,7 +130,6 @@ h1, h2, h3, h4, p, span{
 }
 
 .w-container:hover {
-  transform: scale(1.01);
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
@@ -143,6 +150,18 @@ h1, h2, h3, h4, p, span{
   width: 100%;
   border: solid white 2px;
   pointer-events: none;
+  padding-bottom: 20px;
+  box-sizing: border-box;
+}
+
+.rectangle-no-border{
+  display: block;
+  position: relative;
+  height: auto;
+  width: 100%;
+  pointer-events: none;
+  padding-bottom: 20px;
+  box-sizing: border-box;
 }
 
 .button {
@@ -161,5 +180,46 @@ h1, h2, h3, h4, p, span{
 .button:hover {
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
   background-color: #4CAF50; /* Green */
+  color: white;
+}
+
+.bitContainer {
+  border: 1px solid white;
+  height: 25px;
+  width: 20px;
+  display: inline-block;
+  margin-top: 10px;
+  margin-right: 5px;
+  margin-left: 5px;
+  color: white;
+}
+
+svg{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 15;
+}
+
+line{
+  stroke-width:4px;
+  stroke: white;
+  animation-name: fadeIn;
+  animation-duration: 1s;
+  pointer-events: all;
+}
+
+line:hover{
+  stroke: green;
+  z-index: 16;
+}
+
+.label-container{
+  height: 100%;
+  width: auto;
+  float: left;
   color: white;
 }

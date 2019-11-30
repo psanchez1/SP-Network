@@ -1,40 +1,18 @@
 
-//helper function returns span element with specified colored text
-function colorSpan(color, text) {
-    let span = document.createElement('SPAN');
-    span.style.color = color;
-    span.innerText = text;
-    return span;
-}
-
-//color a 16-bit binary number in 4-bit groups
-function colorBinary(binary) {
-
-}
-
-String.prototype.splice = (start, newSubStr) => {
-    return this.slice(0, start) + newSubStr + this.slice(start);
-}
-
-//returns binary string seperated in 4-bit groups
-function splitBinary(binary) {
-    let r_value = binary.splice(4, ' ');
-    r_value = r_value.splice(9, ' ');
-    r_value = r_value.splice(14, ' ');
-    return r_value;
-}
+let box_types = new Map();
+box_types.set('round_key', 'Round Key');
+box_types.set('p_box', 'P-Box');
+box_types.set('s_box', 'S-Box');
 
 class DOMBox {
     constructor(box, id) {
         this.box = box;
         this.id = id;
-        this.box.updated.add(this.updateValues, this);
+        this.handler = this.box.updated.add(this.updateValues, this);
         this.element = document.createElement('DIV');
-        this.element.setAttribute('data-id', this.id); //maybe remove, unnecessary
     }
 
     updateValues() {
-        console.log(this.element);
         let input = this.box.input;
         let output = this.box.output;
         this.element.firstElementChild.innerText = input + '\n' + toBinary(input, true, this.box.size);
@@ -42,8 +20,29 @@ class DOMBox {
     }
 
     changeBox(newBox) {
+        this.handler.detach();
         this.box = newBox;
-        this.box.updated.add(this.updateValues, this);
+        this.handler = this.box.updated.add(this.updateValues, this);
+    }
+
+    //add rows within container, used to create bit containers
+    addContainerRow(container, idPrefix){
+        let row = document.createElement('div');
+        row.classList.add('row');
+        container.appendChild(row);
+        for(let i = 0; i < 16; i++){
+            let bitContainer = document.createElement('div');
+            bitContainer.classList.add('bitContainer');
+            bitContainer.id = `${idPrefix}${i}`;
+            bitContainer.classList.add(`${idPrefix}${i}`);
+            row.appendChild(bitContainer);
+        }
+    }
+
+    setupLabel(rectangle){
+        let label = rectangle.appendChild(document.createElement('DIV'));
+        label.classList.add('label-container');
+        label.innerText = box_types.get(this.box.type);
     }
 };
 
@@ -51,6 +50,7 @@ class DOM_round_key extends DOMBox {
     constructor(round_key, id) {
         super(round_key, id);
         let element = this.element;
+        //keyText.value = this.box.key;
         element.classList.add('w-container');
         element.id = id;
         element.setAttribute('data-type', 'round_key');
@@ -60,9 +60,14 @@ class DOM_round_key extends DOMBox {
         input_label.innerText = 'Input';
         element.appendChild(input_label);
         let rectangle = document.createElement('DIV');
+        
         rectangle.setAttribute('data-type', 'round_key');
         rectangle.classList.add('rectangle');
-        rectangle.innerHTML = `<h3>XOR with Key: ${toBinary(this.box.key, true, this.box.size)}</h3>`;
+        //rectangle.innerHTML = `<h3>XOR with Key: ${toBinary(this.box.key, true, this.box.size)}</h3>`;
+        this.setupLabel(rectangle);
+        this.addContainerRow(rectangle, 'i');
+        this.addContainerRow(rectangle, 'k');
+
         element.appendChild(rectangle);
         let output_label = document.createElement('H3');
         output_label.setAttribute('data-type', 'round_key');
@@ -98,7 +103,12 @@ class DOM_round_key extends DOMBox {
         this.element.lastElementChild.appendChild(colorSpan(colorScheme[2], third + ' '));
         this.element.lastElementChild.appendChild(colorSpan(colorScheme[3], fourth + ' '));
         let rectangle = document.querySelector(`#${this.id} .rectangle`);
-        rectangle.innerHTML = `<h3>XOR with Key: ${toBinary(this.box.key, true, this.box.size)}</h3>`;
+        //rectangle.innerHTML = `<h3>XOR with Key: ${toBinary(this.box.key, true, this.box.size)}</h3>`;
+        let b_key = toBinary(this.box.key, true, this.box.size);
+        for(let i = 0; i < 16; i++){
+            document.querySelector(`#${this.element.id} .i${i}`).innerText = b_input[i];
+            document.querySelector(`#${this.element.id} .k${i}`).innerText = b_key[i];
+        }
     }
 }
 
@@ -161,6 +171,10 @@ class DOM_p_box extends DOMBox {
         let rectangle = document.createElement('DIV');
         rectangle.setAttribute('data-type', 'p_box');
         rectangle.classList.add('rectangle');
+        this.setupLabel(rectangle);
+        this.addContainerRow(rectangle, 'i'); //add row for input bits
+        this.addContainerRow(rectangle, 'o'); //add row for output bits
+
         element.appendChild(rectangle);
         let output_label = document.createElement('H3');
         output_label.setAttribute('data-type', 'p_box');
@@ -168,5 +182,29 @@ class DOM_p_box extends DOMBox {
         output_label.innerText = 'Output';
         element.appendChild(output_label);
         //this.box.updated.add(this.updateValues, this);
+    }
+
+    updateValues(){
+        super.updateValues();
+        let b_input = toBinary(this.box.input, true, this.box.size);
+        for(let i = 0; i < 16; i++){
+            //document.getElementById(`i${i}`).innerText = b_input[i];
+            document.querySelector(`#${this.element.id} .i${i}`).innerText = b_input[i];
+        }
+        let o_output = toBinary(this.box.output, true, this.box.size);
+        for(let i = 0; i < 16; i++){
+            //document.getElementById(`o${i}`).innerText = o_output[i];
+            document.querySelector(`#${this.element.id} .o${i}`).innerText = o_output[i];
+        }
+
+        /*
+        //draw lines
+        for (let i = 0; i < 16; i++){
+            let input = document.querySelector(`#${this.element.id} .i${i}`);
+            let oNum = this.box.mappings.get(i);
+            let output = document.querySelector(`#${this.element.id} .o${oNum}`);
+            createLine(input, output);
+        }
+        */
     }
 }
