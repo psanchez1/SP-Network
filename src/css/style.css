@@ -101,6 +101,15 @@ h1, h2, h3, h4, p, span{
   height: auto;
 }
 
+.pad-row{
+  display: block;
+  position: relative;
+  width: 100%;
+  height: auto;
+  box-sizing: border-box;
+  padding-bottom: 20px;
+}
+
 .container {
   display: inline-block;
   position: relative;
@@ -142,6 +151,7 @@ h1, h2, h3, h4, p, span{
   border: solid white 2px;
   pointer-events: none;
   padding-bottom: 20px;
+  box-sizing: border-box;
 }
 
 .button {
@@ -185,8 +195,14 @@ svg{
 }
 
 line{
-  stroke-width:2px;
+  stroke-width:4px;
   stroke: white;
   animation-name: fadeIn;
   animation-duration: 1s;
+  pointer-events: all;
+}
+
+line:hover{
+  stroke: green;
+  z-index: 16;
 }

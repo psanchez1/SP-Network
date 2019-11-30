@@ -115,13 +115,6 @@ function start() {
     }
 
     key1.continuous_encrypt();
-
-    /*
-    //test
-    let i1 = document.querySelector('#p1 .i1');
-    let o1 = document.querySelector('#p1 .o5');
-    createLine(i1, o1);
-    */
     
 }
 

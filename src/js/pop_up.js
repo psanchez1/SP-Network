@@ -25,7 +25,7 @@ function togglePopUp() {
         popUp.style.display = "block";
     else {
         let body = document.querySelector('#popUp01 .textContainer');
-        let oldRow = document.querySelector('#popUp01 .textContainer .row');
+        let oldRow = document.querySelector('#popUp01 .textContainer .pad-row');
         if (oldRow)
             body.removeChild(oldRow);
         popUp.style.display = "none";
@@ -56,13 +56,13 @@ function displayPBox(box) {
     let popUp = document.getElementById('popUp01');
     document.getElementById('popUpTitle').innerText = box.type;
     let body = document.querySelector('#popUp01 .textContainer');
-    let oldRow = document.querySelector('#popUp01 .textContainer .row');
+    let oldRow = document.querySelector('#popUp01 .textContainer .pad-row');
     if (oldRow)
         body.removeChild(oldRow);
     let button = document.querySelector('#popUp01 .textContainer input');
     let row = document.createElement('DIV');
     body.insertBefore(row, button);
-    row.classList.add('row');
+    row.classList.add('pad-row');
     let rectangle = row.appendChild(document.createElement('DIV'));
     rectangle.classList.add('rectangle');
     addContainerRow(rectangle, 'i');
@@ -85,7 +85,7 @@ function displayPBox(box) {
 //add rows within container, used to create bit containers
 function addContainerRow(container, idPrefix) {
     let row = document.createElement('div');
-    row.classList.add('row');
+    row.classList.add('pad-row');
     container.appendChild(row);
     for (let i = 0; i < 16; i++) {
         let bitContainer = document.createElement('div');

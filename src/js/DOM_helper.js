@@ -40,7 +40,8 @@ function createLine(element1, element2) {
     let x1 = getOffset(element1).left + (getWidth(element1) / 2);
     let y1 = getOffset(element1).top + (getHeight(element1));
     let x2 = getOffset(element2).left + (getWidth(element2) / 2);
-    let y2 = getOffset(element2).top + (getHeight(element2) / 4);
+    //let y2 = getOffset(element2).top + (getHeight(element2) / 4);
+    let y2 = getOffset(element2).top;
     line.setAttributeNS(null, 'x1', x1);
     line.setAttributeNS(null, 'y1', y1);
     line.setAttributeNS(null, 'x2', x2);

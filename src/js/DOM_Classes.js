@@ -187,6 +187,7 @@ class DOM_p_box extends DOMBox {
             document.querySelector(`#${this.element.id} .o${i}`).innerText = o_output[i];
         }
 
+        /*
         //draw lines
         for (let i = 0; i < 16; i++){
             let input = document.querySelector(`#${this.element.id} .i${i}`);
@@ -194,5 +195,6 @@ class DOM_p_box extends DOMBox {
             let output = document.querySelector(`#${this.element.id} .o${oNum}`);
             createLine(input, output);
         }
+        */
     }
 }
