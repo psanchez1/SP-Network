@@ -154,6 +154,16 @@ h1, h2, h3, h4, p, span{
   box-sizing: border-box;
 }
 
+.rectangle-no-border{
+  display: block;
+  position: relative;
+  height: auto;
+  width: 100%;
+  pointer-events: none;
+  padding-bottom: 20px;
+  box-sizing: border-box;
+}
+
 .button {
   background-color: white;
   color: black;

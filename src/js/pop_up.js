@@ -64,7 +64,7 @@ function displayPBox(box) {
     body.insertBefore(row, button);
     row.classList.add('pad-row');
     let rectangle = row.appendChild(document.createElement('DIV'));
-    rectangle.classList.add('rectangle');
+    rectangle.classList.add('rectangle-no-border');
     addContainerRow(rectangle, 'i');
     let outRow = addContainerRow(rectangle, 'o');
     let b_input = toBinary(box.input, true, box.size);
