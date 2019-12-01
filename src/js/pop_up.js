@@ -119,8 +119,8 @@ window.onresize = e =>{
 };
 
 function customAlert(alert) {
-    document.getElementById('modName').innerText = alert;
-    document.getElementById('statsList').innerText = "";
+    document.getElementById('popUpTitle').innerText = alert;
+    document.getElementById('popUpText').innerText = "";
     togglePopUp();
 }
 

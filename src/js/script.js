@@ -97,15 +97,39 @@ function reset() {
     key1.connect_output(box4);
 }
 
+function validateInput(text){
+    if(text === '')
+        return true;
+    
+    for(let i = 0; i < text.length; i++){
+        if(globalBinary && text[i] !== '1' && text[i] !== '0')
+            return false;
+        
+        if(isNaN(text[i]))
+            return false;
+    }
+    return true;
+}
+
 function start() {
     //default values
     let value = 22;
     let key_value = 1560;
+    if(!validateInput(textbox.value) || !validateInput(keyText.value)){
+        customAlert('Incorrect input');
+        return;
+    }
 
-    if (textbox.value)
+    if (textbox.value){
         value = globalBinary ? parseInt(textbox.value, 2) : parseInt(textbox.value);
-    if (keyText.value)
+    }
+        
+    if (keyText.value){
         key_value = globalBinary ? parseInt(keyText.value, 2) : parseInt(keyText.value);
+    }
+        
+
+
 
     if (textbox.value || keyText.value) {
         key1 = new round_key(key_value);
@@ -115,7 +139,7 @@ function start() {
     }
 
     key1.continuous_encrypt();
-    
+
 }
 
 //TODO: fix here, key2 DOM is not updating correctly
