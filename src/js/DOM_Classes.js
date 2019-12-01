@@ -189,6 +189,7 @@ class DOM_p_box extends DOMBox {
 
     updateValues(){
         super.updateValues();
+        console.log(this.element);
         let b_input = toBinary(this.box.input, true, this.box.size);
         for(let i = 0; i < 16; i++){
             //document.getElementById(`i${i}`).innerText = b_input[i];

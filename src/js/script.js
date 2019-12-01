@@ -160,6 +160,7 @@ function resetBindings() {
     key1.connect_output(box2);
     key1.connect_output(box3);
     key1.connect_output(box4);
+    p1.clear();
     box1.connect_output(p1);
     box2.connect_output(p1);
     box3.connect_output(p1);
