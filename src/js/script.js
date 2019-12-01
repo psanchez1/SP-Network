@@ -17,6 +17,9 @@ const binaryCheck = document.getElementById('BinaryCheck');
 let textbox = document.getElementById('textBox1');
 let keyText = document.getElementById('keyText');
 
+//largest 16 bit number
+const MAX_NUM = 65535; 
+
 function toggleBinary() {
     globalDecimal = globalBinary;
     globalBinary = !globalBinary;
@@ -113,7 +116,7 @@ function validateInput(text){
             return false;
         }
 
-        if(text.length > 16 || (parseInt(text) > 65535 && !globalBinary)){
+        if(text.length > 16 || (parseInt(text) > MAX_NUM && !globalBinary)){
             customAlert('Input too large');
             return false;
         }   
