@@ -84,22 +84,6 @@ let row4 = createRow();
 let DOM_key2 = new DOM_round_key(key2, 'k2');
 row4.appendChild(DOM_key2.element);
 
-console.log('DOM Key2:');
-console.log(DOM_key2);
-
-function reset() {
-    key1 = new round_key(1560);
-    key1.setInput(22);
-    box1 = new s_box(2);
-    box2 = new s_box(2);
-    box3 = new s_box(2);
-    box4 = new s_box(2);
-    key1.connect_output(box1);
-    key1.connect_output(box2);
-    key1.connect_output(box3);
-    key1.connect_output(box4);
-}
-
 //check for incorrect input: non-binary numbers in binary mode or non-digit characters
 function validateInput(text){
     if(text === '')
@@ -151,7 +135,6 @@ function start() {
 
 }
 
-//TODO: fix here, key2 DOM is not updating correctly
 function resetBindings() {
     boxes.set('k1', key1);
     boxes.set('k2', key2);
