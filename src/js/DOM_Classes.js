@@ -162,6 +162,9 @@ class DOM_p_box extends DOMBox {
         let element = this.element;
         element.classList.add('w-container');
         element.id = id;
+        element.ondblclick = e =>{
+            displayPBox(this.box);
+        };
         element.setAttribute('data-type', 'p_box');
         let input_label = document.createElement('H3');
         input_label.setAttribute('data-type', 'p_box');

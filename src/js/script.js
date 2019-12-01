@@ -97,6 +97,7 @@ function reset() {
     key1.connect_output(box4);
 }
 
+//check for incorrect input: non-binary numbers in binary mode or non-digit characters
 function validateInput(text){
     if(text === '')
         return true;
@@ -116,7 +117,7 @@ function start() {
     let value = 22;
     let key_value = 1560;
     if(!validateInput(textbox.value) || !validateInput(keyText.value)){
-        customAlert('Incorrect input');
+        customAlert('Incorrect input: non-digit characters detected or wrong base');
         return;
     }
 
@@ -128,9 +129,6 @@ function start() {
         key_value = globalBinary ? parseInt(keyText.value, 2) : parseInt(keyText.value);
     }
         
-
-
-
     if (textbox.value || keyText.value) {
         key1 = new round_key(key_value);
         key1.setInput(value);

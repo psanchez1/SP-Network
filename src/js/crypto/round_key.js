@@ -12,7 +12,6 @@ class round_key {
         this.updated = new Signal();
     }
 
-    //TODO: validate input, must be number
     setInput(input) {
         this.input = input;
         this.updated.dispatch();
