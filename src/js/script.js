@@ -101,13 +101,22 @@ function reset() {
 function validateInput(text){
     if(text === '')
         return true;
-    
+
     for(let i = 0; i < text.length; i++){
-        if(globalBinary && text[i] !== '1' && text[i] !== '0')
+        if(globalBinary && text[i] !== '1' && text[i] !== '0'){
+            customAlert('Incorrect Input: wrong base');
             return false;
+        }
         
-        if(isNaN(text[i]))
+        if(isNaN(text[i])){
+            customAlert('Incorrect input: non-digit characters detected');
             return false;
+        }
+
+        if(text.length > 16 || (parseInt(text) > 65535 && !globalBinary)){
+            customAlert('Input too large');
+            return false;
+        }   
     }
     return true;
 }
@@ -117,7 +126,6 @@ function start() {
     let value = 22;
     let key_value = 1560;
     if(!validateInput(textbox.value) || !validateInput(keyText.value)){
-        customAlert('Incorrect input: non-digit characters detected or wrong base');
         return;
     }
 
