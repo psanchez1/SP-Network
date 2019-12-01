@@ -1,3 +1,4 @@
+//show or hide the about modal
 function toggleAbout() {
     var about = document.getElementById("about");
     if (about.style.display != "block") {
@@ -6,19 +7,20 @@ function toggleAbout() {
     else {
         about.style.display = "none";
     }
-
     closeNav();
 }
 
+//open sidebar
 function openNav() {
     document.getElementById("mySidenav").style.width = "250px";
 }
 
+//close sidebar
 function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
 }
 
-
+//show or hide pop up modal
 function togglePopUp() {
     let popUp = document.getElementById("popUp01");
     if (popUp.style.display != "block")
@@ -31,10 +33,10 @@ function togglePopUp() {
         popUp.style.display = "none";
         clearLines();
     }
-
     closeNav();
 }
 
+//show information about an SP-Network component in a pop up modal
 function displayBoxInfo(box) {
     let popUp = document.getElementById('popUp01');
     document.getElementById('popUpTitle').innerText = box.type;
@@ -54,6 +56,7 @@ function displayBoxInfo(box) {
 
 let boundDrawLines = null;
 
+//get closer look at p-box mappings
 function displayPBox(box) {
     let popUp = document.getElementById('popUp01');
     document.getElementById('popUpTitle').innerText = box.type;
@@ -100,6 +103,7 @@ function addContainerRow(container, idPrefix) {
     return row;
 }
 
+//draw lines showing how p-box scrambles bits
 function drawLines(box, rectangle) {
     for (let i = 0; i < 16; i++) {
         let input = rectangle.querySelector(`.i${i}`);
@@ -110,6 +114,7 @@ function drawLines(box, rectangle) {
     console.log('Drew lines');
 }
 
+//redraw lines on resize of window
 window.onresize = e =>{
     let popUp = document.getElementById("popUp01");
     if(popUp.style.display === 'block'){
@@ -118,12 +123,14 @@ window.onresize = e =>{
     }
 };
 
+//show a custom alert using a pop up modal
 function customAlert(alert) {
     document.getElementById('popUpTitle').innerText = alert;
     document.getElementById('popUpText').innerText = "";
     togglePopUp();
 }
 
+//show a custom toast
 async function customToast(message) {
     return new Promise((resolve, reject) => {
         let toast = document.getElementById('toastMessage');
@@ -131,20 +138,22 @@ async function customToast(message) {
         openOverlay();
         setTimeout(resolve, 4100);
     });
-
 }
 
+//show or hide the overlay containing the pop up modals
 function toggleOverlay() {
     var overlay = document.getElementById('overlay');
     overlay.style.display == "block" ? overlay.style.display = "none" : overlay.style.display = "block";
 }
 
+//show overlay
 function openOverlay() {
     var overlay = document.getElementById('overlay');
     overlay.style.display = "block";
     setTimeout(closeOverlay, 4000);
 }
 
+//close overlay
 function closeOverlay() {
     var overlay = document.getElementById('overlay');
     overlay.style.display = "none";

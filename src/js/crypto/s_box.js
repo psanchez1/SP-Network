@@ -1,4 +1,5 @@
 const box = require('./box');
+
 //class for a 4-bit substitution box 
 class s_box extends box {
 
