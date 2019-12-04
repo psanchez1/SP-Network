@@ -17,7 +17,6 @@ perm_box.connect_output(key2);
     
 //console.log(key);
 
-
 console.log('Testing round_key:');
 console.log('Round key with key=7 created, input=12');
 console.log(`7 in binary ${toBinary(7)}`);

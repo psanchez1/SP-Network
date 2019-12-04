@@ -16,15 +16,11 @@ class p_box extends box {
             indices[i] = i;
         }
 
-        //console.log("P Box:");
-
         for (let i = 0; i < 16; i++) {
-            //console.log(indices);
             let rand_index = Math.floor(Math.random() * (indices.length));
             let rand_output = indices[rand_index];
             indices.splice(rand_index, 1);
             this.mappings.set(i, rand_output);
-            //console.log(`${i} mapped to ${rand_output}`);
         }
 
         this.c_inputs = [];
@@ -35,10 +31,8 @@ class p_box extends box {
         //get inputs from connected inputs
         let input = '';
         for (let i = 0; i < this.c_inputs.length; i++) {
-            //console.log(`p_box received ${this.c_inputs[i].output} as input`);
             input += toBinary(this.c_inputs[i].output);
         }
-        //console.log(`Input: ${input}`);
         this.input = toDecimal(input);
 
         let output = [];
@@ -46,7 +40,7 @@ class p_box extends box {
         //swap bits according to mappings
         for (let i = 0; i < 16; i++) {
             let dest = this.mappings.get(i);
-            output[dest] = input[i];  //TODO: make changes to variable names to clear confusion
+            output[dest] = input[i];
         }
         input = arrayToString(output);
         this.outputs = [];
@@ -59,7 +53,6 @@ class p_box extends box {
         this.outputs.push(num3);
         this.outputs.push(num4);
         this.output = toDecimal(input);
-        //console.log(`Output: ${input}`);
         this.updated.dispatch();
 
         if(this.c_outputs.length === 1)

@@ -104,6 +104,7 @@ function addContainerRow(container, idPrefix) {
 }
 
 //draw lines showing how p-box scrambles bits
+//NOTE: lines are created in svg element which lays on top of every other element and covers application screen
 function drawLines(box, rectangle) {
     for (let i = 0; i < 16; i++) {
         let input = rectangle.querySelector(`.i${i}`);
