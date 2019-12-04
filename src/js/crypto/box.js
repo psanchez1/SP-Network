@@ -6,7 +6,7 @@ class box {
     constructor(input) {
         if(input)
             this.input = input;
-        this.updated = new Signal(); //raised when important values of class are changed
+        this.updated = new Signal(); //raised when important values of class are changed, allows GUI to know when to update
     }
 
     setInput(input){
